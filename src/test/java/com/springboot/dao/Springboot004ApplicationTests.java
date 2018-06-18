@@ -1,4 +1,4 @@
-package com.springboot.springboot004;
+package com.springboot.dao;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
