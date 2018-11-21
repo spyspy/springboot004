@@ -26,7 +26,14 @@ public class SpringBoot004Controller {
     @ResponseBody
     public List<Person> findall(){
         System.out.println(personRepo.findAll());
+
         return personRepo.findAll();
+    }
+
+    @RequestMapping("/test")
+    @ResponseBody
+    public String test(){
+        return "wow";
     }
 
 }
