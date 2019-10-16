@@ -8,8 +8,15 @@ import javax.persistence.*;
 @Table(name = "persons")
 public class Person {
 
+    /**
+     *     @GeneratedValue(strategy = GenerationType.AUTO)
+     *     This cannot be used in "Primary Key"!!! Only GenerationType.IDENTITY !!
+     */
+
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
     private String name;
