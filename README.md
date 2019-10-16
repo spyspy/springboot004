@@ -13,12 +13,19 @@ when we access db successfully. you will see following content on your browser.
 create database newdb;
 
 CREATE TABLE Persons (
-id int,
+id int NOT NULL AUTO_INCREMENT,
 name varchar(255),
-address varchar(255)
-)
+address varchar(255),
+PRIMARY KEY (id)
+);
 
-INSERT INTO Persons (id,name,address)values(1,'Peter','Taipei');
-INSERT INTO Persons (id,name,address)values(2,'Jacky','Taichung');
-INSERT INTO Persons (id,name,address)values(3,'Lewis','WOWOW');
+INSERT INTO Persons (name,address)values('Peter','Taipei');
+INSERT INTO Persons (name,address)values('Jacky','Taichung');
+INSERT INTO Persons (name,address)values('Lewis','New York');
+INSERT INTO Persons (name,address)values('Michael Jack','Washington');
 
+#Run:  Springboot004Application.java
+URL: http://localhost:8080/findall
+
+#Problem solving?
+If in "Intellij" see a Red Circle J. Move mouse to pom.xml and Mouse Right Click, and  
