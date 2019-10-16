@@ -2,12 +2,15 @@ package com.springboot.dao;
 
 import javax.persistence.*;
 
+//@Table(name = "persons")   ie: "persons" is the table name
+
 @Entity
 @Table(name = "persons")
 public class Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private int id;
     private String name;
     private String address;
