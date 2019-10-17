@@ -25,7 +25,8 @@ INSERT INTO Persons (name,address)values('Lewis','New York');
 INSERT INTO Persons (name,address)values('Michael Jack','Washington');
 
 #Run:  Springboot004Application.java
-URL: http://localhost:8080/findall
+URL: http://localhost:8080/kiki/wow
+Note: Set /kiki in application.properties
 
 #Problem solving?
 If in "Intellij" see a Red Circle J. Move mouse to pom.xml and Mouse Right Click, and  
