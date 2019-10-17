@@ -1,7 +1,7 @@
 package com.springboot.controller;
 
-import com.springboot.dao.Person;
-import com.springboot.dao.PersonRepo;
+import com.springboot.entity.PersonEntity;
+import com.springboot.dao.PersonDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -14,7 +14,7 @@ import java.util.List;
 public class SpringBoot004Controller {
 
     @Autowired
-    PersonRepo personRepo;
+    PersonDao personDao;
 
     @RequestMapping("/wow")
     public String Wow(){
@@ -24,10 +24,10 @@ public class SpringBoot004Controller {
 
     @RequestMapping("/findall")
     @ResponseBody
-    public List<Person> findall(){
-        System.out.println(personRepo.findAll());
+    public List<PersonEntity> findall(){
+        System.out.println(personDao.findAll());
 
-        return personRepo.findAll();
+        return personDao.findAll();
     }
 
     @RequestMapping("/test")
