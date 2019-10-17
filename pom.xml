@@ -55,7 +55,12 @@
 			<artifactId>druid</artifactId>
 			<!--<version>1.0.9</version>-->
 		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.10</version>
+        </dependency>
+    </dependencies>
 
 	<build>
 		<plugins>
