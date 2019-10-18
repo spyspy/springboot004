@@ -3,10 +3,7 @@ package com.springboot.aspect;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
-import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -29,7 +26,7 @@ public class LogAspect {
         System.out.println("doControllerBefore: WOWOWOOWO KOKKOOO");
         Signature signature = point.getSignature();
 
-        log.debug("call controller: {}, method: {}, args: {}", signature.getDeclaringTypeName(), signature.getName(), point.getArgs());
+//        log.debug("call controller: {}, method: {}, args: {}", signature.getDeclaringTypeName(), signature.getName(), point.getArgs());
 
         RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
 
@@ -45,7 +42,12 @@ public class LogAspect {
 
         Signature signature = point.getSignature();
 
-        log.debug("return controller: {}, method: {}, args: {}", signature.getDeclaringTypeName(), signature.getName(), args);
+//        log.debug("return controller: {}, method: {}, args: {}", signature.getDeclaringTypeName(), signature.getName(), args);
     }
+
+//    @Around(value="WOW")
+//    public void wow(){
+//
+//    }
 
 }
