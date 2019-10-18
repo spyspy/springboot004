@@ -1,4 +1,4 @@
-package com.springboot.dao;
+package com.springboot.entity;
 
 import javax.persistence.*;
 
@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "persons")
-public class Person {
+public class PersonEntity {
 
     /**
      *     @GeneratedValue(strategy = GenerationType.AUTO)

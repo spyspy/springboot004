@@ -1,7 +1,7 @@
 package com.springboot;
 
-import com.springboot.dao.Person;
-import com.springboot.dao.PersonRepo;
+import com.springboot.entity.PersonEntity;
+import com.springboot.dao.PersonDao;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,19 +10,19 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 //@RunWith(SpringRunner.class)
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(classes = Springboot004Application.class)
-public class Springboot004ApplicationTests {
+@SpringBootTest(classes = Springboot004App.class)
+public class Springboot004AppTests {
 
 	@Autowired
-	private PersonRepo personRepo;
+	private PersonDao personDao;
 
 	@Test
 	public void contextLoads() {
-		Person person = new Person();
-		person.setAddress("WOW");
-		person.setName("WOW NAME");
+		PersonEntity personEntity = new PersonEntity();
+		personEntity.setAddress("WOW");
+		personEntity.setName("WOW NAME");
 
-		this.personRepo.save(person);
+		this.personDao.save(personEntity);
 	}
 
 }

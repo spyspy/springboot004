@@ -9,11 +9,11 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ComponentScan
 @SpringBootApplication(scanBasePackageClasses = {SpringBoot004Controller.class})
-public class Springboot004Application {
+public class Springboot004App {
 
 	public static void main(String[] args) {
 		System.out.println("Let's goooooooo!!!!");
-		SpringApplication.run(Springboot004Application.class, args);
+		SpringApplication.run(Springboot004App.class, args);
 		System.out.println("Let's homehome!!!!");
 	}
 }
