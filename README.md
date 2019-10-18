@@ -12,6 +12,8 @@ when we access db successfully. you will see following content on your browser.
 # MySQL command
 create database newdb;
 
+use newdb;
+
 CREATE TABLE Persons (
 id int NOT NULL AUTO_INCREMENT,
 name varchar(255),
