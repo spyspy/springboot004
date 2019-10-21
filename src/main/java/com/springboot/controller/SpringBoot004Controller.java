@@ -3,11 +3,10 @@ package com.springboot.controller;
 import com.springboot.entity.PersonEntity;
 import com.springboot.dao.PersonDao;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -15,14 +14,13 @@ public class SpringBoot004Controller {
 
     @Autowired
     PersonDao personDao;
-
-    @RequestMapping("/wow")
+    @RequestMapping(value = "/wow", method = {RequestMethod.POST,RequestMethod.GET})
     public String Wow(){
 
         return "Hello Wow!!! This is for Subclass....";
     }
 
-    @RequestMapping("/findall")
+    @RequestMapping(value ="/findall", method = {RequestMethod.POST,RequestMethod.GET})
     @ResponseBody
     public List<PersonEntity> findall(){
         System.out.println(personDao.findAll());
@@ -30,7 +28,17 @@ public class SpringBoot004Controller {
         return personDao.findAll();
     }
 
-    @RequestMapping("/test")
+    @RequestMapping(value ="/findone/{id}", method = {RequestMethod.POST,RequestMethod.GET})
+    @ResponseBody
+    public List<PersonEntity> findone(@PathVariable("id") Integer id){
+        List<Integer> listString = new ArrayList<Integer>();
+        listString.add(id);
+        System.out.println(personDao.findAll());
+
+        return (List<PersonEntity>) personDao.findAllById(listString);
+    }
+
+    @RequestMapping(value = "/test", method = {RequestMethod.POST,RequestMethod.GET})
     @ResponseBody
     public String test(){
         return "wow";

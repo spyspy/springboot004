@@ -30,5 +30,8 @@ INSERT INTO Persons (name,address)values('Michael Jack','Washington');
 URL: http://localhost:8080/kiki/wow
 Note: Set /kiki in application.properties
 
+#Swagger
+http://127.0.0.1:8080/kiki/swagger-ui.html
+
 #Problem solving?
 If in "Intellij" see a Red Circle J. Move mouse to pom.xml and Mouse Right Click, and  

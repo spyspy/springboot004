@@ -12,9 +12,9 @@ import org.springframework.context.annotation.Configuration;
 public class Springboot004App {
 
 	public static void main(String[] args) {
-		System.out.println("Let's goooooooo!!!!");
+		System.out.println("Let's GOOOO!!!!---------STRAT");
 		SpringApplication.run(Springboot004App.class, args);
-		System.out.println("Let's homehome!!!!");
+		System.out.println("Let's HOMEHOME!!!!-----END");
 	}
 }
 
