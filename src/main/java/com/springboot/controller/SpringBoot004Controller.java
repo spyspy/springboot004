@@ -1,11 +1,14 @@
 package com.springboot.controller;
 
+import com.springboot.dao.ExtendRepository;
 import com.springboot.entity.PersonEntity;
 import com.springboot.dao.PersonDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +17,10 @@ public class SpringBoot004Controller {
 
     @Autowired
     PersonDao personDao;
+
+    @Autowired
+    ExtendRepository extendRepository;
+
     @RequestMapping(value = "/wow", method = {RequestMethod.POST,RequestMethod.GET})
     public String Wow(){
 
@@ -21,7 +28,7 @@ public class SpringBoot004Controller {
     }
 
     @RequestMapping(value ="/findall", method = {RequestMethod.POST,RequestMethod.GET})
-    @ResponseBody
+//    @ResponseBody //Use RestController. No need to use @ReponseBody
     public List<PersonEntity> findall(){
         System.out.println(personDao.findAll());
 
@@ -29,7 +36,7 @@ public class SpringBoot004Controller {
     }
 
     @RequestMapping(value ="/findone/{id}", method = {RequestMethod.POST,RequestMethod.GET})
-    @ResponseBody
+//    @ResponseBody
     public List<PersonEntity> findone(@PathVariable("id") Integer id){
         List<Integer> listString = new ArrayList<Integer>();
         listString.add(id);
@@ -38,10 +45,20 @@ public class SpringBoot004Controller {
         return (List<PersonEntity>) personDao.findAllById(listString);
     }
 
-    @RequestMapping(value = "/test", method = {RequestMethod.POST,RequestMethod.GET})
-    @ResponseBody
-    public String test(){
-        return "wow";
+    @RequestMapping(value = "/save", method = {RequestMethod.POST,RequestMethod.GET})
+//    @ResponseBody
+    public String save(){
+        PersonEntity personEntity = new PersonEntity();
+        LocalDateTime today = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+        String formatDateTime = today.format(formatter);
+        String address = "Add-"+formatDateTime;
+        String name = "Name-"+formatDateTime;
+        personEntity.setAddress(address);
+        personEntity.setName(name);
+        extendRepository.save(personEntity);
+        return "You Save a new Data !! " + name +" || "+address;
     }
 
 }
