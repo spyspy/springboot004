@@ -26,7 +26,7 @@ INSERT INTO Persons (name,address)values('Jacky','Taichung');
 INSERT INTO Persons (name,address)values('Lewis','New York');
 INSERT INTO Persons (name,address)values('Michael Jack','Washington');
 
-#Run:  Springboot004Application.java
+# Run:  Springboot004Application.java
 #URL:[暗暗暗](http://localhost:8080/kiki/wow)
 #Note: Set /kiki in application.properties
 #[Swagger Officer Site](https://swagger.io)
@@ -36,9 +36,9 @@ http://127.0.0.1:8080/kiki/swagger-ui.html
 
 
 
-#Problem solving?
+# Problem solving?
 If in "Intellij" see a Red Circle J. Move mouse to pom.xml and Mouse Right Click, and  
 
-#Test
+# Test
 ![image](https://github.com/spyspy/springboot004/blob/master/src/main/resources/photos/2019-10-17_200851.png)
 
