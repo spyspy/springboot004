@@ -4,9 +4,13 @@ import com.springboot.dao.ExtendRepository;
 import com.springboot.entity.PersonEntity;
 import com.springboot.dao.PersonDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -38,11 +42,11 @@ public class SpringBoot004Controller {
     @RequestMapping(value ="/findone/{id}", method = {RequestMethod.POST,RequestMethod.GET})
 //    @ResponseBody
     public List<PersonEntity> findone(@PathVariable("id") Integer id){
-        List<Integer> listString = new ArrayList<Integer>();
+        List<Integer> listString = new ArrayList<>();
         listString.add(id);
         System.out.println(personDao.findAll());
 
-        return (List<PersonEntity>) personDao.findAllById(listString);
+        return personDao.findAllById(listString);
     }
 
     @RequestMapping(value = "/save", method = {RequestMethod.POST,RequestMethod.GET})
@@ -60,5 +64,4 @@ public class SpringBoot004Controller {
         extendRepository.save(personEntity);
         return "You Save a new Data !! " + name +" || "+address;
     }
-
 }
