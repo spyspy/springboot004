@@ -13,9 +13,10 @@ import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.templatemode.TemplateMode;
 
-@Configuration
-@ComponentScan
-@SpringBootApplication(scanBasePackageClasses = {SpringBoot004Controller.class, FileUploadController.class})
+//@Configuration
+//@ComponentScan
+//@SpringBootApplication(scanBasePackageClasses = {SpringBoot004Controller.class, FileUploadController.class})
+@SpringBootApplication
 public class Springboot004App {
 
 	public static void main(String[] args) {
