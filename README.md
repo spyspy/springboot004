@@ -42,3 +42,7 @@ If in "Intellij" see a Red Circle J. Move mouse to pom.xml and Mouse Right Click
 # Test
 ![image](https://github.com/spyspy/springboot004/blob/master/src/main/resources/photos/2019-10-17_200851.png)
 
+
+# Upload Files URL:
+http://localhost:8080/kiki/uploadFiles
+uploadfileBox

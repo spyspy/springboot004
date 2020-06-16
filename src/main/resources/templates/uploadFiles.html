@@ -1,5 +1,24 @@
 <!DOCTYPE html>
 <html xmlns:th="https://www.thymeleaf.org">
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    function pushMe1(){
+        console.log("pushMe1()......");
+        axios({
+            method: 'post',
+            url: 'test',
+            data: {
+                firstName: 'Finn',
+                lastName: 'Williams'
+            }
+        });
+    }
+
+</script>
+
+<head>
+    <title>Upload Test</title>
+</head>
 <body>
 
 <div th:if="${message}">
@@ -7,7 +26,7 @@
 </div>
 
 <div>
-    <h3>Just Upload Now!</h3>
+    <h3 style="color:red">Upload files via Form!</h3>
     <form method="POST" enctype="multipart/form-data" action="/kiki/uploadFiles">
         <table>
             <tr><td>File to upload:</td><td><input type="file" name="file" /></td></tr>
@@ -24,5 +43,14 @@
     </ul>
 </div>
 
+
+<hr>
+
+<h3 style="color:blue">Upload files via Ajsx</h3>
+
+<button onclick="pushMe1();">Press Me1</button>
+<button onclick="pushMe2();">Press Me2</button>
 </body>
+
+
 </html>
