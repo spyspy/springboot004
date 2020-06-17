@@ -2,16 +2,42 @@
 <html xmlns:th="https://www.thymeleaf.org">
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
+
+
+    //Use Axios Libraries
+    //Ref: https://blog.logrocket.com/how-to-make-http-requests-like-a-pro-with-axios/
+
     function pushMe1(){
         console.log("pushMe1()......");
+
+        //Define JS object
+        const dataObject = {
+            firstName: 'Apple' ,
+            lastName:'Banana',
+            address:'My Tokyo Japan'
+        };
+
+
+        //Use axios to do ajax's job? Http Request
         axios({
             method: 'post',
             url: 'test',
-            data: {
-                firstName: 'Finn',
-                lastName: 'Williams'
-            }
-        });
+            data: dataObject
+
+        }).then((response) => {
+            //If the promise is fulfilled....
+            console.log(dataObject);
+            console.log(response);
+
+        }, (error) => {
+            //if the promise is rejected
+            console.log(error);
+        });;
+    }
+
+
+    function pushMe2(){
+        console.log("pushMe2()......");
     }
 
 </script>

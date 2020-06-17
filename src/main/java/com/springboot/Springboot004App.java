@@ -1,17 +1,7 @@
 package com.springboot;
 
-import com.springboot.controller.FileUploadController;
-import com.springboot.controller.SpringBoot004Controller;
-import com.springboot.service.StorageService;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.thymeleaf.spring5.SpringTemplateEngine;
-import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
-import org.thymeleaf.templatemode.TemplateMode;
 
 //@Configuration
 //@ComponentScan

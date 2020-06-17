@@ -46,3 +46,10 @@ If in "Intellij" see a Red Circle J. Move mouse to pom.xml and Mouse Right Click
 # Upload Files URL:
 http://localhost:8080/kiki/uploadFiles
 uploadfileBox
+
+#Topic to explore:
+Vue;
+Angular;
+React;
+Redis;
+MongoDB;

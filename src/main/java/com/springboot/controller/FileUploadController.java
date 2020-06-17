@@ -1,5 +1,7 @@
 package com.springboot.controller;
 
+import com.springboot.service.FileUploadService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -9,14 +11,19 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
 import java.io.*;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Map;
+import java.util.stream.Stream;
 
 @Controller
 public class FileUploadController {
 
     private static String UPLOADED_FOLDER = ".//upload//";
+
+    @Autowired
+    FileUploadService fileUploadService;
 
     //2020/06/12 upload Test
     @GetMapping("/uploadFiles")
@@ -33,7 +40,8 @@ public class FileUploadController {
         System.out.println("Entering (POST) sendPostUploadFiles.......");
         System.out.println("multipartFile.getName(): "+multipartFile.getName() +" " +multipartFile.getOriginalFilename());
 
-        saveUploadedFiles(multipartFile,httpRequest);
+        fileUploadService.saveUploadedFiles(multipartFile,httpRequest);
+        fileUploadService.zipSingleFile(multipartFile,httpRequest);
 
         return "finish";
     }
@@ -44,49 +52,27 @@ public class FileUploadController {
     @ResponseBody
     public String test(@RequestBody Map<String,String> params) throws IOException {
 
-        System.out.println("test....");
-        System.out.println("test...."+params);
+        System.out.println("test method is calling....");
+        System.out.println("input object: "+params);
 
 
 //        return "redirect:/uploadFiles";
         return "testEmpty";
     }
 
-    //Save Files From  Web page to Disk C:/test/
-    private void saveUploadedFiles(MultipartFile file,HttpServletRequest httpRequest) throws IOException, ServletException {
-        InputStream initialStream = file.getInputStream();
+    @GetMapping("/filelist")
+    @ResponseBody
+    public String getFileList() throws IOException{
 
-        byte[] buffer = new byte[initialStream.available()];
-        initialStream.read(buffer);
+        System.out.println("getFileList method is calling....");
 
-        //Save in Disk
-        File targetFile = new File("C://WebUploadTest//"+file.getOriginalFilename());
-        OutputStream outStream = new FileOutputStream(targetFile);
-        outStream.write(buffer);
-        outStream.close();
+        //To Get file List from.... Ex: C:\WebUploadTest\
+        //Ref: https://stackoverflow.com/questions/1844688/how-to-read-all-files-in-a-folder-from-java
+        //Java 8 + The try-with-resources
+        try (Stream<Path> paths = Files.walk(Paths.get("C:/WebUploadTest/"))) {
+            paths.filter(Files::isRegularFile).forEach(System.out::println);
+        }
 
-        //Save in Server
-        //Get Real Path First
-        Part part = httpRequest.getPart("file");//Form's input name
-        String fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
-        System.out.println("fileName:"+fileName);
-        Path basePath = Paths.get("./").toAbsolutePath().normalize();
-        System.out.println("basePath:"+basePath);
-        String serverUploadPath  = basePath+"\\src\\main\\resources\\uploadfileBox\\";
-        System.out.println("serverUploadPath:"+serverUploadPath);
-
-        InputStream fileContent = part.getInputStream();
-
-        //Save in the real path of the server
-        File targetFile2 = new File(serverUploadPath+file.getOriginalFilename());
-        OutputStream outStream2 = new FileOutputStream(targetFile2);
-        outStream2.write(buffer);
-        outStream2.close();
-
-
-        //Save in DB?  Save as BLOB?
+        return "testEmpty";
     }
-
-    //Save Files From  Web page to Server /uploadFiles/
-
 }
