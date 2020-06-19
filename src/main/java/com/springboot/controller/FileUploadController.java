@@ -9,8 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.Part;
-import java.io.*;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -74,5 +73,13 @@ public class FileUploadController {
         }
 
         return "testEmpty";
+    }
+
+
+    //Boostrap Test Example
+    @RequestMapping(value = "/bootstrap", method = {RequestMethod.POST, RequestMethod.GET})
+    public String bootstraptest() {
+
+        return "bootstraptest";
     }
 }
