@@ -33,7 +33,8 @@ public class FileUploadController {
     //2020/06/12 upload Test
     @GetMapping("/uploadFiles")
     public String listUploadedFiles(Model model) throws IOException {
-
+        String timeLog = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss").format(Calendar.getInstance().getTime());
+        model.addAttribute("serverTime", timeLog);
         System.out.println("Entering (GET) listUploadedFiles.......");
 
         return "uploadFiles";
@@ -104,7 +105,7 @@ public class FileUploadController {
 
 
     public void downloadTextFile(HttpServletResponse response) throws IOException {
-        response.reset();
+
         String timeLog = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
 
         response.setHeader("Content-Disposition", "attachment; filename=myfile"+timeLog+".txt");
