@@ -5,10 +5,21 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import java.io.*;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -86,5 +97,140 @@ public class FileUploadServiceImp implements FileUploadService {
     }
 
     //Save Files From  Web page to Server /uploadFiles/
+    @Override
+    public void downloadTextFile(HttpServletResponse response) throws IOException {
 
+        System.out.println("downloadTextFile: Start......");
+
+        //Define file name with date and time
+        String timeLog = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
+
+        //define response OutputStream
+        //https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Content-Disposition
+
+//        response.setHeader("Content-Disposition", "attachment; filename=myfile"+timeLog+".txt");//Download file with specific name
+//        response.setHeader("Content-Disposition", "inline; filename=myfile"+timeLog+".txt");//open in browser/mouse right save as a file
+//        response.setHeader("Content-Disposition", "form-data; filename="+timeLog+".txt");//Download file with specific name
+//        response.setHeader("Content-Disposition", "attachment");//Download file with No specific name
+
+
+        response.setContentType("text/plain");
+        OutputStream outStream = response.getOutputStream();
+
+//        byte[] buf = new byte[4096];
+        byte[] buf = new byte[1024];//Change buffer to 1024 bytes ( 1 KB)
+        int len = -1;
+
+        //Define file content
+        String textContent ="This is my test \nWow wow Wow   \nWonderful Life Very Good for your healthy!!!";
+
+        //Convert file content to InputStream
+        InputStream inputStream = new ByteArrayInputStream(textContent.getBytes(StandardCharsets.UTF_8));
+
+        //Write the file contents to the servlet response
+        //Using a buffer of 4kb (configurable). This can be
+        //optimized based on web server and app server
+        //properties
+
+        while ((len = inputStream.read(buf)) != -1) {
+            outStream.write(buf, 0, len);
+        }
+
+        outStream.flush();
+        outStream.close();
+
+        System.out.println("downloadTextFile: End......");
+
+    }
+
+
+    //Make a text file in the project folder if not specify
+    @Override
+    public void makeTextFile(){
+        BufferedWriter writer = null;
+        try {
+            //create a temporary file
+            String timeLog = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
+            File logFile = new File(timeLog+".txt");
+            // This will output the full path where the file will be written to...
+            System.out.println(logFile.getCanonicalPath());
+
+            writer = new BufferedWriter(new FileWriter(logFile));
+            writer.write("Hello world!");
+
+            //Download location example:
+            //C:\Users\OOOOOOOOO\IdeaProjects\springboot004\20200706_194433
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                // Close the writer regardless of what happens...
+                writer.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+
+        //JAVA 7 up to make a text file
+        List<String> lines = Arrays.asList("The first line", "The second line");
+        Path file = Paths.get("the-file-name-java7.txt");
+        try{
+            Files.write(file, lines, StandardCharsets.UTF_8);
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+        //End
+    }
+
+    //How To Read a static file on the server
+    @Override
+    public void readStaticFile() throws IOException {
+
+        // ...../src/main/resources/..
+        String filePath = "/uploadfileBox/readme.txt";
+
+        InputStream is = this.getClass().getResourceAsStream(filePath);
+
+        //To get real path
+        URL url = getClass().getResource(filePath);
+
+        System.out.println("readFile() Real Path: "+url.getPath());
+
+        BufferedReader bufReader = new BufferedReader(new InputStreamReader(is));
+
+        String strCurrentLine;
+
+        System.out.println("readFile() --------Read file content : Start--------");
+        while ((strCurrentLine=bufReader.readLine()) != null) {
+            System.out.println(strCurrentLine);
+        }
+        System.out.println("readFile() --------Read file content : End--------");
+
+    }
+
+    @Override
+    public void getFilesList(){
+        //Get File list -------- Start
+        String fileFolderName = "/uploadfileBox/";
+        URL url2 = getClass().getResource(fileFolderName);
+
+        System.out.println("readFile() Real Path2: "+url2.getPath());
+
+        Set<String> setStr = listFilesUsingJavaIO(url2.getPath());
+        System.out.println(setStr);
+
+        //Java 8 iterate set object
+        setStr.forEach(System.out::println);
+
+        //Get File list -------- End
+    }
+
+    public Set<String> listFilesUsingJavaIO(String fileDir) {
+        return Stream.of(new File(fileDir).listFiles())
+                .filter(file -> !file.isDirectory())
+                .map(File::getName)
+                .collect(Collectors.toSet());
+    }
 }

@@ -10,16 +10,16 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.*;
-import java.nio.charset.StandardCharsets;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Stream;
 
 @Controller
@@ -32,10 +32,14 @@ public class FileUploadController {
 
     //2020/06/12 upload Test
     @GetMapping("/uploadFiles")
-    public String listUploadedFiles(Model model) throws IOException {
+    public String listUploadedFiles(Model model) {
+        System.out.println("Entering (GET) listUploadedFiles.......");
         String timeLog = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss").format(Calendar.getInstance().getTime());
         model.addAttribute("serverTime", timeLog);
-        System.out.println("Entering (GET) listUploadedFiles.......");
+
+        List<String> files = Arrays.asList("File001.jpg","File002.xls","File003.WOW");
+
+        model.addAttribute("files", files);
 
         return "uploadFiles";
     }
@@ -61,7 +65,6 @@ public class FileUploadController {
         System.out.println("test method is calling....");
         System.out.println("input object: "+params);
 
-
 //        return "redirect:/uploadFiles";
         return "testEmpty";
     }
@@ -82,10 +85,6 @@ public class FileUploadController {
         return "testEmpty";
     }
 
-
-
-
-
     //Boostrap Test Example
     @RequestMapping(value = "/bootstrap", method = {RequestMethod.POST, RequestMethod.GET})
     public String bootstraptest() {
@@ -96,84 +95,14 @@ public class FileUploadController {
 
     @GetMapping(value = "/download")
     public void getDownlad(HttpServletResponse response) throws IOException {
-        downloadTextFile(response);
 
-        makeTextFile();
+        fileUploadService.downloadTextFile(response);
+
+        fileUploadService.makeTextFile();
+
+        fileUploadService.readStaticFile();
 
         response.flushBuffer();
     }
 
-
-    public void downloadTextFile(HttpServletResponse response) throws IOException {
-
-        String timeLog = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
-
-        response.setHeader("Content-Disposition", "attachment; filename=myfile"+timeLog+".txt");
-        response.setContentType("text/plain");
-        OutputStream outStream = response.getOutputStream();
-        byte[] buf = new byte[4096];
-        int len = -1;
-
-        String textContent ="This is my test \n Wow wow Wow";
-
-
-        InputStream result = new ByteArrayInputStream(textContent.getBytes(StandardCharsets.UTF_8));
-        System.out.println("IIIIIIIIIIIIIIIIIIIIII");
-//Write the file contents to the servlet response
-//Using a buffer of 4kb (configurable). This can be
-//optimized based on web server and app server
-//properties
-        while ((len = result.read(buf)) != -1) {
-            outStream.write(buf, 0, len);
-        }
-
-        outStream.flush();
-        outStream.close();
-        System.out.println("XXXXXXXXXXXXXXXXXXXXX");
-
-    }
-
-
-    public void makeTextFile(){
-        BufferedWriter writer = null;
-        try {
-            //create a temporary file
-            String timeLog = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
-            File logFile = new File(timeLog+".txt");
-            // This will output the full path where the file will be written to...
-            System.out.println(logFile.getCanonicalPath());
-
-            writer = new BufferedWriter(new FileWriter(logFile));
-            writer.write("Hello world!");
-
-
-
-            //Download location example:
-            //C:\Users\OOOOOOOOO\IdeaProjects\springboot004\20200706_194433
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                // Close the writer regardless of what happens...
-                writer.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
-
-        //JAVA 7 up to make a text file
-        List<String> lines = Arrays.asList("The first line", "The second line");
-        Path file = Paths.get("the-file-name.txt");
-        try{
-            Files.write(file, lines, StandardCharsets.UTF_8);
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-        //End
-
-
-
-    }
 }
