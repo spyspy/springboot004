@@ -1,5 +1,6 @@
 package com.springboot.controller;
 
+import com.springboot.model.Greeting;
 import com.springboot.service.FileUploadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -41,11 +42,14 @@ public class FileUploadController {
 
         model.addAttribute("files", files);
 
+        //For Form Test
+        model.addAttribute("greeting", new Greeting());
+
         return "uploadFiles";
     }
 
     @PostMapping("/uploadFiles")
-    public String sendPostUploadFiles(Model model, @RequestParam("file") MultipartFile multipartFile, HttpServletRequest httpRequest) throws IOException, ServletException {
+    public String sendPostUploadFiles(@RequestParam("file") MultipartFile multipartFile, HttpServletRequest httpRequest) throws IOException, ServletException {
 
         System.out.println("Entering (POST) sendPostUploadFiles.......");
         System.out.println("multipartFile.getName(): "+multipartFile.getName() +" " +multipartFile.getOriginalFilename());
@@ -103,6 +107,12 @@ public class FileUploadController {
         fileUploadService.readStaticFile();
 
         response.flushBuffer();
+    }
+
+    //----------- Gretting n Form  Test
+    @PostMapping("/greeting")
+    public String greetingSubmit(@ModelAttribute Greeting greeting) {
+        return "result";
     }
 
 }

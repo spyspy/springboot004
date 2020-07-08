@@ -18,12 +18,12 @@ public class LogAspect {
 
     @Pointcut("execution(* com.springboot.controller.*.*(..))")
     public void controllerLog() {
-
+        System.out.println("AOP: controllerLog()");
     }
 
     @Before(value = "controllerLog()")
     public void doControllerBefore(JoinPoint point) {
-        System.out.println("doControllerBefore: Before Before!!!");
+        System.out.println("AOP: doControllerBefore: Before Before!!!");
         Signature signature = point.getSignature();
 
 //        log.debug("call controller: {}, method: {}, args: {}", signature.getDeclaringTypeName(), signature.getName(), point.getArgs());
@@ -38,7 +38,7 @@ public class LogAspect {
 
     @AfterReturning(value = "controllerLog()", returning = "args")
     public void doControllerAfterReturning(JoinPoint point, Object args) {
-        System.out.println("doControllerAfterReturning: After After");
+        System.out.println("AOP: doControllerAfterReturning: After After");
 
         Signature signature = point.getSignature();
 
