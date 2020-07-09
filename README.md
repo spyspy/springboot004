@@ -1,4 +1,5 @@
-# springboot004
+# springboot004 (Homepage)
+http://localhost:8080/kiki/
 # SpringBoot with MySQL and JPA example
 
 when we access db successfully. you will see following content on your browser.
