@@ -4,18 +4,17 @@ import com.springboot.dao.ExtendRepository;
 import com.springboot.dao.PersonDao;
 import com.springboot.entity.PersonEntity;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+//NOTE: This controller use @RestControler annotation, thus, Thymeleaf seems not to work here!!!!
+
 @RestController
-public class SpringBoot004Controller {
+public class RestWSController {
 
     @Autowired
     PersonDao personDao;
@@ -23,12 +22,14 @@ public class SpringBoot004Controller {
     @Autowired
     ExtendRepository extendRepository;
 
+    // Show Text Only
     @RequestMapping(value = "/wow", method = {RequestMethod.POST, RequestMethod.GET})
     public String wow() {
 
         return "Hello Wow!!! This is for Subclass....";
     }
 
+    // Show JSON result from DB
     @RequestMapping(value = "/findall", method = {RequestMethod.POST, RequestMethod.GET})
 //    @ResponseBody //Use RestController. No need to use @ReponseBody
     public List<PersonEntity> findall() {
@@ -37,6 +38,7 @@ public class SpringBoot004Controller {
         return personDao.findAll();
     }
 
+    // Show JSON result by giving argument(Parameter) for DAO
     @RequestMapping(value = "/findone/{id}", method = {RequestMethod.POST, RequestMethod.GET})
 //    @ResponseBody
     public List<PersonEntity> findone(@PathVariable("id") Integer id) {
@@ -47,6 +49,7 @@ public class SpringBoot004Controller {
         return personDao.findAllById(listString);
     }
 
+    //Save Data
     @RequestMapping(value = "/save", method = {RequestMethod.POST, RequestMethod.GET})
 //    @ResponseBody
     public String save() {

@@ -23,7 +23,7 @@ public class LogAspect {
 
     @Before(value = "controllerLog()")
     public void doControllerBefore(JoinPoint point) {
-        System.out.println("AOP: doControllerBefore: Before Before!!!");
+        System.out.println("AOP: doControllerBefore: Before!!!");
         Signature signature = point.getSignature();
 
 //        log.debug("call controller: {}, method: {}, args: {}", signature.getDeclaringTypeName(), signature.getName(), point.getArgs());
@@ -38,7 +38,7 @@ public class LogAspect {
 
     @AfterReturning(value = "controllerLog()", returning = "args")
     public void doControllerAfterReturning(JoinPoint point, Object args) {
-        System.out.println("AOP: doControllerAfterReturning: After After");
+        System.out.println("AOP: doControllerAfterReturning: After");
 
         Signature signature = point.getSignature();
 

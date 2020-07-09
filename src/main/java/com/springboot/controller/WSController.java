@@ -16,7 +16,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 @RestController
-public class WebServiceController {
+public class WSController {
 
     @Autowired
     Student student;

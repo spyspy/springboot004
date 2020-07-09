@@ -24,7 +24,7 @@ import java.util.*;
 import java.util.stream.Stream;
 
 @Controller
-public class FileUploadController {
+public class FileController {
 
     private static String UPLOADED_FOLDER = ".//upload//";
 

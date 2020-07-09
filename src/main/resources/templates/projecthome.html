@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <title>Project Home</title>
+</head>
+<body>
+
+<div class="alert alert-danger" role="alert" onclick="">Project Home</div>
+
+<hr>
+
+<div class="container">
+    <div class="alert alert-primary" role="alert" >
+        <h5>Restful WebService: </h5>
+        <a href="/kiki/getstudentinfo">Show Single Object</a><br>
+        <a href="/kiki/getstudentinfolist">Show Object List</a><br>
+        <a href="/kiki/threadtest">Thread Test</a><br>
+    </div>
+    <div class="alert alert-success" role="alert" >
+        <h5>JAP and Restful WebService:  <span class="badge badge-danger">Note: MySQL Database Required !!</span></h5>
+        <!--<p style="color:red">Note: Database Required !!</p>-->
+        <a href="/kiki/wow">Show String Only</a><br>
+        <a href="/kiki/findall">Select ALL</a><br>
+        <a href="/kiki/findone/6">Find No 6</a><br>
+        <a href="/kiki/save">Save</a><br>
+    </div>
+    <div class="alert alert-secondary" role="alert" onclick="console.log('WOW')">
+        <h5>Bootstrap Test</h5>
+        <a href="/kiki/bootstrap">Bootstrap Test</a><br>
+    </div>
+    <div class="alert alert-warning" role="alert" onclick="console.log('WOW')">
+        <h5>Thymeleaf Test</h5>
+        <a href="/kiki/#">Thymeleaf Test</a><br>
+    </div>
+    <div class="alert alert-info" role="alert" onclick="console.log('WOW')">
+        <h5>File Upload and Download...</h5>
+        <a href="/kiki/uploadFiles">uploadFiles</a>
+    </div>
+    <div class="alert alert-primary" role="alert" onclick="console.log('WOW')">
+        <h5>Potential List</h5>
+        <span>WebSocket</span><br>
+        <span>JSON Web Tokens - jwt.io</span><br>
+        <span>OAuth 2.0</span><br>
+        <span>Google Tag Manager</span><br>
+        <span>Redis</span><br>
+        <span>MongoDB</span><br>
+        <span>Design pattern</span><br>
+    </div>
+</div>
+
+</body>
+</html>
