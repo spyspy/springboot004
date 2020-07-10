@@ -2,11 +2,13 @@ package com.springboot;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 
 //@Configuration
 //@ComponentScan
 //@SpringBootApplication(scanBasePackageClasses = {SpringBoot004Controller.class, FileUploadController.class})
 //Not Necessary use "scanBasePackageClasses" to specify the controller.
+//@SpringBootApplication(exclude = { SecurityAutoConfiguration.class }) //Exculde: Spring Security Auto Configuration
 @SpringBootApplication
 public class Springboot004App {
 
